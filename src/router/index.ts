@@ -13,10 +13,6 @@ const HomePage = () => import('@/views/HomePage.vue')
 const ContentPolicy = () => import('@/views/ContentPolicy.vue')
 const NotFound = () => import('@/views/NotFound.vue')
 
-const DEFAULT_TITLE = 'vibe.j2team.org - J2TEAM Community Vibe Coding'
-const DEFAULT_DESCRIPTION =
-  'Cả nhóm J2TEAM Community vibe code cùng nhau! Mỗi thành viên tạo một trang con, vibe code thoải mái.'
-
 const pageRoutes: RouteRecordRaw[] = pages.map((page) => {
   const componentPath = `/src/views${page.path}/index.vue`
   const loader = pageComponents[componentPath]
@@ -42,8 +38,9 @@ const router = createRouter({
       name: 'home',
       component: HomePage,
       meta: {
-        title: DEFAULT_TITLE,
-        description: DEFAULT_DESCRIPTION,
+        title: 'vibe.j2team.org - J2TEAM Community Vibe Coding',
+        description:
+          'Cả nhóm J2TEAM Community vibe code cùng nhau! Mỗi thành viên tạo một trang con, vibe code thoải mái.',
       },
     },
     ...pageRoutes,
@@ -66,15 +63,6 @@ const router = createRouter({
       },
     },
   ],
-})
-
-router.afterEach((to) => {
-  document.title = to.meta.title || DEFAULT_TITLE
-
-  const descriptionEl = document.querySelector('meta[name="description"]')
-  if (descriptionEl) {
-    descriptionEl.setAttribute('content', to.meta.description || DEFAULT_DESCRIPTION)
-  }
 })
 
 export default router
