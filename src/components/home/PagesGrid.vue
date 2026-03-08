@@ -20,20 +20,26 @@ function normalize(str: string): string {
 const searchQuery = ref('')
 const activeCategory = ref<string | null>(null)
 
+const searchablePages = pages.map((p) => ({
+  ...p,
+  _name: normalize(p.name),
+  _desc: normalize(p.description),
+  _author: normalize(p.author),
+}))
+
 const filteredPages = computed(() => {
   const query = normalize(searchQuery.value.trim())
   const category = activeCategory.value
 
-  return pages.filter((page) => {
+  return searchablePages.filter((page) => {
     if (category) {
       if (page.category !== category) return false
     }
 
     if (query) {
-      const name = normalize(page.name)
-      const description = normalize(page.description)
-      const author = normalize(page.author)
-      return name.includes(query) || description.includes(query) || author.includes(query)
+      return (
+        page._name.includes(query) || page._desc.includes(query) || page._author.includes(query)
+      )
     }
 
     return true
