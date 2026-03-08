@@ -53,12 +53,18 @@ import { REPO_URL } from '@/data/constants'
       >
         Top đóng góp
       </RouterLink>
-      <a :href="REPO_URL" target="_blank" rel="noopener noreferrer nofollow">
+      <a
+        :href="REPO_URL"
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        class="star-btn relative overflow-hidden transition-transform duration-300 hover:scale-105"
+      >
+        <span class="star-shimmer" aria-hidden="true"></span>
         <img
           alt="GitHub Repo stars"
           src="https://img.shields.io/github/stars/J2TEAM/vibe.j2team.org?style=for-the-badge&logo=github&label=Stars"
           loading="lazy"
-          class="h-[46px]"
+          class="relative h-[46px]"
         />
       </a>
     </div>
@@ -69,3 +75,31 @@ import { REPO_URL } from '@/data/constants'
     </div>
   </header>
 </template>
+
+<style scoped>
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.star-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.2) 45%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.2) 55%,
+    transparent 60%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+  animation-delay: 2s;
+  pointer-events: none;
+}
+</style>
