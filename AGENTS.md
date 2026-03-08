@@ -101,6 +101,40 @@ Read `docs/DESIGN_SYSTEM.md` before making any visual changes.
    - `shiki` — Syntax highlighter
 8. **Author attribution required** — every page must have an `author` field in its `meta.ts` file
 
+## Recommended Internal Structure
+
+For apps with 4+ files, follow this recommended structure inside `src/views/<app-name>/`:
+
+```
+src/views/<app-name>/
+  index.vue              # Required: page entry point
+  meta.ts                # Required: page metadata
+  components/            # Recommended: Vue components used by the page
+  composables/           # Recommended: composition functions (use-*.ts)
+  types.ts               # Recommended: TypeScript type definitions
+  utils/                 # Recommended: pure utility functions
+  assets/                # Recommended: images, sounds, CSS (processed by Vite)
+```
+
+Simple apps (just a single page) only need `index.vue` + `meta.ts`.
+
+### Static Assets Convention
+
+- `src/views/<app-name>/assets/` — images, sounds, CSS that Vite will hash and optimize. **Use this for most cases.**
+- `public/<app-name>/` — large media files (videos, large image sets) served as-is without Vite processing. Accessible at `/<app-name>/filename.ext`.
+
+### Shared Utilities (opt-in)
+
+Reusable code used by 3+ apps can live in the shared layer:
+
+```
+src/components/shared/     # Shared UI components
+src/composables/shared/    # Shared composables
+src/utils/shared/          # Shared utility functions
+```
+
+Apps can import from these directories but are never required to. Each app remains self-contained by default.
+
 ## Adding a New Page
 
 1. Create a new directory under `src/views/<your-page-name>/`
