@@ -91,7 +91,7 @@ onUnmounted(() => document.removeEventListener('keydown', handleKeydown))
 <template>
   <main class="max-w-5xl mx-auto px-4 sm:px-6 pb-16 scroll-reveal">
     <h2
-      class="font-display text-2xl font-semibold text-text-primary mb-8 flex items-center gap-3 animate-fade-up"
+      class="font-display text-xl sm:text-2xl font-semibold text-text-primary mb-8 flex items-center gap-3 animate-fade-up"
     >
       <span class="text-accent-coral font-display text-sm tracking-widest">//</span>
       Các trang đã tạo
