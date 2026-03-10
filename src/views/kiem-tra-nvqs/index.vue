@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue'
-import { toPng } from 'html-to-image'
 
 const showScrollTop = ref(false)
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -124,6 +123,8 @@ const exportImage = async () => {
   if (!resultCardRef.value) return
   isExporting.value = true
   try {
+    // Dynamic import to avoid bundling html-to-image into the main chunk
+    const { toPng } = await import('html-to-image')
     const dataUrl = await toPng(resultCardRef.value, {
       quality: 1,
       backgroundColor: '#0F1923',
