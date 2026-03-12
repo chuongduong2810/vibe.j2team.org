@@ -398,6 +398,7 @@ function update(delta: number) {
     // Boss vs Player bullet collision
     for (let j = bullets.length - 1; j >= 0; j--) {
       const b = bullets[j]
+      if (!b) continue
       if (b.isPlayer) {
         const dist = Math.hypot(boss.pos.x - b.pos.x, boss.pos.y - b.pos.y)
         if (dist < boss.radius + b.radius + 5) {
@@ -445,6 +446,7 @@ function update(delta: number) {
   // Bullets update & Enemy Hit
   for (let j = bullets.length - 1; j >= 0; j--) {
     const b = bullets[j]
+    if (!b) continue
     b.pos.x += b.vel.x * dt
     b.pos.y += b.vel.y * dt
     b.life -= dt
@@ -487,6 +489,7 @@ function update(delta: number) {
   // Enemies update
   for (let i = enemies.length - 1; i >= 0; i--) {
     const e = enemies[i]
+    if (!e) continue
 
     // Move towards player
     const angleToPlayer = Math.atan2(player.pos.y - e.pos.y, player.pos.x - e.pos.x)
@@ -496,6 +499,7 @@ function update(delta: number) {
     // Bullet collision
     for (let j = bullets.length - 1; j >= 0; j--) {
       const b = bullets[j]
+      if (!b) continue
       if (b.isPlayer) {
         const dist = Math.hypot(e.pos.x - b.pos.x, e.pos.y - b.pos.y)
         if (dist < e.radius + b.radius) {
@@ -572,6 +576,7 @@ function update(delta: number) {
   // Items update
   for (let i = items.length - 1; i >= 0; i--) {
     const item = items[i]
+    if (!item) continue
     item.life -= dt
     if (item.life <= 0) {
       items.splice(i, 1)
@@ -612,6 +617,7 @@ function update(delta: number) {
   // Particles update
   for (let i = particles.length - 1; i >= 0; i--) {
     const p = particles[i]
+    if (!p) continue
     p.pos.x += p.vel.x * dt
     p.pos.y += p.vel.y * dt
     p.life -= dt
